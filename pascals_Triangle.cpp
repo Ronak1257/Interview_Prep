@@ -33,13 +33,7 @@ void printNthRowOptimal(int n){
 void printFirstNRows(int n){
     cout<<1<<endl;
     for(int i=2;i<=n;i++){
-        int prev=1;
-        cout<<1<<" ";
-        for(int j=1;j<i;j++){
-            prev=(prev*(i-j))/j;
-            cout<<prev<<" ";
-        }
-        cout<<endl;
+        printNthRowOptimal(i);
     }
 }
 
