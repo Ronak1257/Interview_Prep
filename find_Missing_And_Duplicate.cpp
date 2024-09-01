@@ -11,6 +11,7 @@ vector<int> usingMath(vector<int>nums){
         s+=nums[i];
         s2+=nums[i]*nums[i];
     }
+    cout<<s<<sn<<s2<<s2n<<endl;
     int t1=s-sn;
     int t2=(s2-s2n)/t1;
     vector<int>ans={(t1+t2)/2,(t2-t1)/2};
@@ -28,10 +29,8 @@ vector<int> usingXor(vector<int>nums){
     for(int i=0;i<n;i++){
         if((nums[i]&number)!=0) one^=nums[i];
         else zero^=nums[i];
-    }
-    for(int i=1;i<=n;i++){
-        if((i&number)!=0) one^=i;
-        else zero^=i;
+        if((i+1)&number) one^=i+1;
+        else zero^=i+1;
     }
     int a1c=0,a2c=0;
     for(int i=0;i<n;i++){
@@ -43,8 +42,8 @@ vector<int> usingXor(vector<int>nums){
 }
 int main(){
     vector<int>nums={1,2,2,3,5};
-    // vector<int>ans=usingMath(nums);
-    // cout<<"repeating : "<<ans[0]<<endl<<"missing : "<<ans[1]<<endl;
+    vector<int>ans=usingMath(nums);
+    cout<<"repeating : "<<ans[0]<<endl<<"missing : "<<ans[1]<<endl;
 
     vector<int>ans1=usingXor(nums);
     cout<<"repeating : "<<ans1[0]<<endl<<"missing : "<<ans1[1]<<endl;
