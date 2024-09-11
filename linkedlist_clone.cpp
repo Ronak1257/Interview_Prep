@@ -45,6 +45,52 @@ Node* cloneLL(Node* head){
     return map[head];
 }
 
+void insertCopyInBetween(Node* head){
+    Node* temp=head;
+    while(temp!=nullptr){
+        Node* cloneNode=new Node(temp->data);
+        Node* nextNode=temp->next;
+        cloneNode->next=nextNode;
+        temp->next=cloneNode;
+        temp=nextNode;
+    }
+}
+
+void connectRandomPointer(Node* head){
+    Node* temp=head;
+    while(temp!=nullptr){
+        Node* copyNode=temp->next;
+        if(temp->random){
+            copyNode->random=temp->random->next;
+        }
+        else{
+            copyNode->random=nullptr;
+        }
+        temp=temp->next->next;
+    }
+}
+
+Node* getDeepCopy(Node* head){
+    Node* temp=head;
+    Node* dummy=new Node(-1);
+    Node* res=dummy;
+    while(temp!=nullptr){
+        res->next=temp->next;
+        res=res->next;
+
+        temp->next=temp->next->next;
+        temp=temp->next;
+    }
+    return dummy->next;
+}
+
+Node* cloneLLoptimal(Node* head){
+    insertCopyInBetween(head);
+    connectRandomPointer(head);
+    return getDeepCopy(head);
+}
+
+
 int main(){
     Node* head= new Node(7);
     head->next = new Node(14);
@@ -61,9 +107,10 @@ int main(){
     printlist(head);
     
     Node* clonelist=cloneLL(head);
+    Node* clonelistoptimal=cloneLL(head);
 
     cout<<"Clone List : "<<endl;
-    printlist(clonelist);
+    printlist(clonelistoptimal);
 
     return 0;
 }
