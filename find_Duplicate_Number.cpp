@@ -26,7 +26,7 @@ int usingHash(vector<int>nums){
         map[nums[i]]++;
     }
     for(auto i:map){
-        if(i.second==2){
+        if(i.second>1){
             return i.first;
         }
     }
@@ -34,7 +34,7 @@ int usingHash(vector<int>nums){
 }
 int main(){
     vector<int>nums={1,3,5,3,6,7};
-    cout<<bruteForce(nums);
+    cout<<bruteForce(nums)<<endl;
     cout<<usingHash(nums)<<endl;
     cout<<onePointer(nums);
     return 0;
